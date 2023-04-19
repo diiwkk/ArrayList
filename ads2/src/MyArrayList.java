@@ -63,6 +63,25 @@ public class MyArrayList<T> implements myLIst<T> {
         sb.append(("]");
         return sb.toString();
     }
+    public boolean remove(T item) {
+        for (int i = 0; i < size; i++) {
+            if (elements[i].equals(item)) {
+                remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
+    public T removw(int index){
+        if(index<0 || index>=size){
+            throw new IndexOutOfBoundsException("Index is out of bounds");
+        }
+        T removedItem=(T) elements[index];
+        System.arraycopy(elements, index+1, elements, index, size-index-1);
+        elements[size-1]=null;
+        size--;
+        return removedItem;
+    }
 
 }
 
