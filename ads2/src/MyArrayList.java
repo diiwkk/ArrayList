@@ -1,5 +1,3 @@
-import javax.lang.model.util.Elements;
-
 public class MyArrayList<T> implements myLIst<T> {
     private static void final int INITIAL_CAPACITY = 20;
     private Object[] elements;
@@ -63,7 +61,7 @@ public class MyArrayList<T> implements myLIst<T> {
         sb.append(("]");
         return sb.toString();
     }
-    public boolean remove(T item) {
+    public boolean remove(int item) {
         for (int i = 0; i < size; i++) {
             if (elements[i].equals(item)) {
                 remove(i);
@@ -82,6 +80,49 @@ public class MyArrayList<T> implements myLIst<T> {
         size--;
         return removedItem;
     }
+    public void clear() {
+        for (int i = 0; i < size; i++) {
+            elements[i] = null;
+        }
+        size = 0;
+    }
+    public T get(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index is out of bounds");
+        }
+        T item = (T) elements[index];
+        return item;
+    }
+    public int indexOf(Object o) {
+        for(int i = 0; i < size; i++){
+            if(elements[i].equals(o)){
+                return i;
+            }
+        }
+        return -1;
+    }
 
+    public int lastIndex(Object o) {
+        for(int i = size - 1; i >= 0; i--){
+            if(elements[i].equals(o)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public void sort() {
+        for(int i = 0; i < size - 1; i++){
+            for(int j = 0; j < size - i - 1; j++){
+                Comparable<T> currentItem = (Comparable<T>) elements[j];
+                Comparable<T> nextItem = (Comparable<T>) elements[j+1];
+                if(currentItem.compareTo((T) nextItem) > 0){
+                    Object temp = elements[j];
+                    elements[j] = elements[j+1];
+                    elements[j + 1] = temp;
+                }
+            }
+        }
+    }
 }
 
