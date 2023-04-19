@@ -1,10 +1,11 @@
-public class MyArrayList {
-    public static void main(String[] args) {
-        myList<String> list= new MyArrayList<>();
-        list.add("111");
-        list.add("222");
-        list.add("333");
-        list.add("444");
-        System.out.println("size:" +list.size());
+public class MyArrayList<T> implements myLIst<T> {
+    private static void final int DEFOULT_CAPACITY = 20;
+    private Object[] element;
+    private int size;
+    public myArrayList(){
+        element = new Object[DEFOULT_CAPACITY];
+        size = 0;
+
     }
+
 }
