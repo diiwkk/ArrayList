@@ -38,4 +38,31 @@ public class MyArrayList<T> implements myLIst<T> {
         elements[size]=item;
         size++;
     }
+    public void add(T item, int index) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Indeex is out of bounds");
+        }
+        if (size == elements.length) {
+            Object[] newElements = new Object[elements.length * 2];
+            System.arraycopy(elements, 0, newElements, 0, elements.length);
+            elements = newElements;
+        }
+        System.arraycopy(elements, index, elements, index + 1, size - index);
+        elements[index] = item;
+        size++;
+    }
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for (int i=0; i<size; i++){
+            sb.append(elements[i]);
+            if (i<size-1){
+                sb.append(", ");
+            }
+        }
+        sb.append(("]");
+        return sb.toString();
+    }
+
 }
+
