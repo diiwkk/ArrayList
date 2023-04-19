@@ -20,12 +20,10 @@ public class MyLinkedList<T> implements MyList<T> {
         size = 0;
     }
 
-    @Override
     public int size() {
         return size;
     }
 
-    @Override
     public boolean contains(Object o) {
         Node<T> currentNode = head;
         while (currentNode != null) {
@@ -37,7 +35,6 @@ public class MyLinkedList<T> implements MyList<T> {
         return false;
     }
 
-    @Override
     public void add(T item) {
         Node<T> newNode = new Node<>(item);
         if (head == null) {
@@ -51,7 +48,6 @@ public class MyLinkedList<T> implements MyList<T> {
         size++;
     }
 
-    @Override
     public void add(T item, int index) {
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException("Index out of bounds");
@@ -86,7 +82,6 @@ public class MyLinkedList<T> implements MyList<T> {
         }
     }
 
-    @Override
     public boolean remove(T item) {
         Node<T> currentNode = head;
         while (currentNode != null) {
@@ -107,5 +102,33 @@ public class MyLinkedList<T> implements MyList<T> {
             currentNode = currentNode.next;
         }
         return false;
+    }
+
+    public T remove(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index out of bounds");
+        }
+        Node<T> currentNode = head;
+        for (int i = 0; i < index; i++) {
+            currentNode = currentNode.next;
+        }
+        if (currentNode.previous != null) {
+            currentNode.previous.next = currentNode.next;
+        } else {
+            head = currentNode.next;
+        }
+        if (currentNode.next != null) {
+            currentNode.next.previous = currentNode.previous;
+        } else {
+            tail = currentNode.previous;
+        }
+        size--;
+        return currentNode.element;
+    }
+
+    public void clear() {
+        head = null;
+        tail = null;
+        size = 0;
     }
 }
